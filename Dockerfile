@@ -7,6 +7,7 @@ RUN apk add --update --no-cache openssh \
   && find /etc/ssh/ -type f -name "ssh_host_*" | xargs -IXXX mv XXX /host_keys/ \
   && find /host_keys/ -type f | xargs -IXXX ln -s XXX /etc/ssh/ \
   && sed -i 's/#\?PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
+  && sed -i 's/#\?X11Forwarding no/X11Forwarding yes/' /etc/ssh/sshd_config \
   && mkdir -p /data
 COPY run.sh /run.sh
 CMD ["/run.sh"]
